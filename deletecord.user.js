@@ -1,6 +1,10 @@
 // ==UserScript==
-// @name          Deletecord - Delete all messages in a Discord channel or DM (mass deletion)
-// @description   Adds button to the discord browser UI that popups up panel to mass delete messages from discord
+// @name          Deletecord - Mass Delete Discord Messages
+// @description   Adds a button to the Discord browser UI to mass delete messages from Discord channels and direct messages
+// @description:ja DiscordのブラウザUIにボタンを追加し、Discordのチャンネルおよびダイレクトメッセージからメッセージを一括削除します
+// @description:zh-CN 在Discord浏览器UI中添加按钮，以批量删除Discord频道和私信中的消息
+// @description:zh-HK 在Discord瀏覽器UI中添加按鈕，以批量刪除Discord頻道和私信中的消息
+// @description:fr Ajoute un bouton à l'interface utilisateur du navigateur Discord pour supprimer en masse les messages des canaux et des messages directs de Discord
 // @namespace     https://github.com/bekkibau/deletecord
 // @version       0.1
 // @match         https://discord.com/*
