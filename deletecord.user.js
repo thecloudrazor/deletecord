@@ -225,6 +225,10 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
                             log.verb(`Cooling down for ${w * 2}ms before retrying...`);
                             await wait(w * 2);
                             j--; // retry
+                        } else if (resp.status === 403 || resp.status === 400) {
+                            log.warn('Insufficient permissions to delete message. Skipping this message.');
+                            offset++;
+                            failCount++;
                         } else {
                             log.error(`Error deleting message, API responded with status ${resp.status}!`, await resp.json());
                             log.verb('Related object:', redact(JSON.stringify(message)));
