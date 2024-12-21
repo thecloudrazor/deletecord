@@ -32,7 +32,7 @@
  * @author bekkibau <https://www.github.com/bekkibau>
  * @see https://github.com/bekkibau/deletecord
  */
-async function deleteMessages(authToken, authorId, guildId, channelId, minId, maxId, content, hasLink, hasFile, includeNsfw, includePinned, searchDelay, deleteDelay, delayIncrement, delayDecrement, delayDecrementPerMsgs, extLogger, stopHndl, onProgress) {
+async function deleteMessages(authToken, authorId, guildId, channelId, minId, maxId, content, hasLink, hasFile, includeNsfw, includePinned, searchDelay, deleteDelay, delayIncrement, delayDecrement, delayDecrementPerMsgs, retryAfterMultiplier, extLogger, stopHndl, onProgress) {
     const start = new Date();
     let delCount = 0;
     let failCount = 0;
@@ -143,9 +143,9 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
                 //adjustDelay(w); // Adjust delay based on retry_after value
                 log.warn(`Being rate limited by the API for ${w*1000}ms! Consider increasing search delay...`);
                 printDelayStats();
-                log.verb(`Cooling down for ${w * 3000}ms before retrying...`);
+                log.verb(`Cooling down for ${w * retryAfterMultiplier}ms before retrying...`);
 
-                await wait(w * 3000); //ms to s, 3x delay for margin
+                await wait(w * retryAfterMultiplier);
                 return await recurse();
             } else {
                 return log.error(`Error searching messages, API responded with status ${resp.status}!\n`, await resp.json());
@@ -227,8 +227,8 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
                             console.log(delayIncrement);
                             log.warn(`Being rate limited by the API for ${w * 1000}ms! Adjusted delete delay to ${deleteDelay}ms.`);
                             printDelayStats();
-                            log.verb(`Cooling down for ${w * 3000}ms before retrying...`); //ms to s, 3x delay for margin
-                            await wait(w * 3000); //ms to s, 3x delay for margin
+                            log.verb(`Cooling down for ${w * retryAfterMultiplier}ms before retrying...`);
+                            await wait(w * retryAfterMultiplier);
                             j--; // retry
                         } else if (resp.status === 403 || resp.status === 400) {
                             log.warn('Insufficient permissions to delete message. Skipping this message.');
@@ -452,9 +452,10 @@ function initUI() {
         const includePinned = $('input#includePinned').checked;
         const searchDelay = parseInt($('input#searchDelay').value.trim());
         const deleteDelay = parseInt($('input#deleteDelay').value.trim());
-        const delayIncrement = parseInt("150"); //ms
-        const delayDecrement = parseInt("-50"); //ms
+        const delayIncrement = 150; //ms
+        const delayDecrement = -50; //ms
         const delayDecrementPerMsgs = parseInt("1000") //msgs; 1000 messages at ~1300ms delay is about half an hour.
+        const retryAfterMultiplier = 3000; //1000 to convert to seconds, 3x for extra delay
         const progress = $('#progress');
         const progress2 = btn.querySelector('progress');
         const percent = $('.percent');
@@ -489,7 +490,7 @@ function initUI() {
 
         stop = stopBtn.disabled = !(startBtn.disabled = true);
         for (let i = 0; i < channelIds.length; i++) {
-            await deleteMessages(authToken, authorId, guildId, channelIds[i], minId || minDate, maxId || maxDate, content, hasLink, hasFile, includeNsfw, includePinned, searchDelay, deleteDelay, delayIncrement, delayDecrement, delayDecrementPerMsgs,logger, stopHndl, onProg);
+            await deleteMessages(authToken, authorId, guildId, channelIds[i], minId || minDate, maxId || maxDate, content, hasLink, hasFile, includeNsfw, includePinned, searchDelay, deleteDelay, delayIncrement, delayDecrement, delayDecrementPerMsgs,retryAfterMultiplier, logger, stopHndl, onProg);
             stop = stopBtn.disabled = !(startBtn.disabled = false);
         }
     };
