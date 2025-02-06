@@ -1,6 +1,6 @@
 > **notice:** discord explicity prohibits the use of unauthorized third-party scripts through their [TOS](https://discord.com/terms). so, usage of this script can result in consequences such as account suspension, bans, etc. Please use at your own risk. 
 
-# deletecord
+# [deletecord](https://bekkibau.github.io/deletecord) 
 
 [github](https://github.com/bekkibau/deletecord) / [greasyfork](https://greasyfork.org/en/scripts/518587-deletcord-delete-all-messages-in-a-discord-channel-or-dm-mass-deletion)   
 mass delete all discord messages from any dm or channel.  
