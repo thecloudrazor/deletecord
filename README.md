@@ -108,7 +108,7 @@ If this ever breaks, I recommend you first check out:
 - [victornpb gist](https://gist.github.com/victornpb/135f5b346dea4decfc8f63ad7d9cc182)
 - [victornpb discussions](https://github.com/victornpb/undiscord/discussions)
 
-# privacy Policy
+# privacy policy
 i adhere to the original creator's [Privacy Policy](https://github.com/bekkibau/deletecord/wiki/Security-Policy)
 
 > [!WARNING]  
