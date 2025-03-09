@@ -6,9 +6,12 @@ mass delete all discord messages from any dm or channel
 
 # how to use
 ### prereq
-download a userscripts manager (eg. [ViolentMonkey](https://violentmonkey.github.io)) 
+download a userscripts manager (eg. [ViolentMonkey](https://violentmonkey.github.io))  
+
 > [!NOTE] 
-Chrome users: ViolentMonkey is unsupported due to extension Manifest V2 deprecation. A temporary workaround is needed: [steps to allow legacy extension manifest version flag](https://github.com/violentmonkey/violentmonkey/issues/2284#issuecomment-2709021118) 
+Chrome users: ViolentMonkey is unsupported due to extension Manifest V2 deprecation. A temporary workaround is needed: [steps to allow legacy extension manifest version flag](https://github.com/violentmonkey/violentmonkey/issues/2284#issuecomment-2709021118)  
+
+
 ### steps
 1. download this script from [GreasyFork](https://greasyfork.org/en/scripts/518587-deletcord-delete-all-messages-in-a-discord-channel-or-dm-mass-deletion) or the JS file here
 2. open [discord](https://discord.com/app) in the browser
@@ -20,15 +23,17 @@ Chrome users: ViolentMonkey is unsupported due to extension Manifest V2 deprecat
 8. press green `start` button
 9. wait for it to finish (can take many hours!)
 10. `prevent automatically sleeping on power adapter` (optional -> see green tip below)
-11. rerun a few more times to delete any skipped messages (quicker than first time)
+11. rerun a few more times to delete any skipped messages (quicker than first time)  
+    
 > [!IMPORTANT]  
-I recommend you skim through the entire chat to confirm if all messages are deleted. If not simply re-run until all done (sorry this is a bug - its not perfect, but still better than manually deleting single msgs imo)
+I recommend you skim through the entire chat to confirm if all messages are deleted. If not simply re-run until all done (sorry this is a bug - its not perfect, but still better than manually deleting single msgs imo)  
 
 13. `re-enable allowing computer to sleep` (optional -> see green tip below)
-14. done! - you can disable the userscript until the next time you need it
+14. done! - you can disable the userscript until the next time you need it  
 
 > [!TIP]
-you only need to prevent sleep if you have a lot of messages to delete and/or will likely not be using your computer the whole time (ie. display turns off and computer sleeps) (instructions for [macOS](https://support.apple.com/en-ca/guide/mac-help/mchle41a6ccd/mac), please google and share for other OS)
+you only need to prevent sleep if you have a lot of messages to delete and/or will likely not be using your computer the whole time (ie. display turns off and computer sleeps) (instructions for [macOS](https://support.apple.com/en-ca/guide/mac-help/mchle41a6ccd/mac), please google and share for other OS)  
+
 
 # options
 self-explanatory. refer to the [forked wiki](https://github.com/bekkibau/deketecord/wiki) if you need more info
