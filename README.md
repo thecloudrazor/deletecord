@@ -1,34 +1,37 @@
-> **notice:** discord explicity prohibits the use of unauthorized third-party scripts through their [TOS](https://discord.com/terms). so, usage of this script can result in consequences such as account suspension, bans, etc. Please use at your own risk. 
-
 # [deletecord](https://bekkibau.github.io/deletecord) 
 
-[github](https://github.com/bekkibau/deletecord) / [greasyfork](https://greasyfork.org/en/scripts/518587-deletcord-delete-all-messages-in-a-discord-channel-or-dm-mass-deletion)   
-mass delete all discord messages from any dm or channel.  
+[website](https://bekkibau.github.io/deletecord) / [greasyfork](https://greasyfork.org/en/scripts/518587-deletcord-delete-all-messages-in-a-discord-channel-or-dm-mass-deletion) / [github](https://github.com/bekkibau/deletecord)  
 
-fork of [undiscord](https://github.com/victornpb/undiscord)
+mass delete all discord messages from any dm or channel  
 
-
-# use
+# how to use
 ### prereq
-download a userscripts manager (eg. [ViolentMonkey](https://violentmonkey.github.io))
+download a userscripts manager (eg. [ViolentMonkey](https://violentmonkey.github.io)) 
+> [!NOTE] 
+Chrome users: ViolentMonkey is unsupported due to extension Manifest V2 deprecation. A temporary workaround is needed: [steps to allow legacy extension manifest version flag](https://github.com/violentmonkey/violentmonkey/issues/2284#issuecomment-2709021118) 
 ### steps
 1. download this script from [GreasyFork](https://greasyfork.org/en/scripts/518587-deletcord-delete-all-messages-in-a-discord-channel-or-dm-mass-deletion) or the JS file here
 2. open [discord](https://discord.com/app) in the browser
 3. enable script
-4. open the dm or channel you want to delete
+4. open the dm or channel where you want to delete the messages
 5. press the new `trash icon` in top right-hand corner
 6. press all the blue `get` buttons in the popup
 7. configure [options](#options) (default: all)
 8. press green `start` button
-9. ** "prevent automatically sleeping on power adapter" 
-10. run a few more times to delete any skipped messages (quicker than first time) 
-11. ** re-enable allowing computer to sleep
-12. done! - you can disable the userscript until the next time you need it
+9. wait for it to finish (can take many hours!)
+10. `prevent automatically sleeping on power adapter` (optional -> see green tip below)
+11. rerun a few more times to delete any skipped messages (quicker than first time)
+> [!IMPORTANT]  
+I recommend you skim through the entire chat to confirm if all messages are deleted. If not simply re-run until all done (sorry this is a bug - its not perfect, but still better than manually deleting single msgs imo)
 
-** you only need to prevent sleep if you have a lot of messages to delete and/or will likely not be using your computer the whole time (ie. display turns off and computer sleeps) (instructions for [macOS](https://support.apple.com/en-ca/guide/mac-help/mchle41a6ccd/mac), please google for this setting for other OS) 
+13. `re-enable allowing computer to sleep` (optional -> see green tip below)
+14. done! - you can disable the userscript until the next time you need it
+
+> [!TIP]
+you only need to prevent sleep if you have a lot of messages to delete and/or will likely not be using your computer the whole time (ie. display turns off and computer sleeps) (instructions for [macOS](https://support.apple.com/en-ca/guide/mac-help/mchle41a6ccd/mac), please google and share for other OS)
 
 # options
-self-explanatory. See original documentation if you need help, refer to the [wiki](https://github.com/bekkibau/deketecord/wiki).
+self-explanatory. refer to the [forked wiki](https://github.com/bekkibau/deketecord/wiki) if you need more info
 
 find `message ids` by right-clicking them  
 adjust `delay` in ms to test for optimal deletion rate 
@@ -78,15 +81,13 @@ once all messages are found and deleted, the script will end automatically. I re
 only few 100s of messages were found the 2nd time, idk im paranoid so, run it few more times just in case!
 ![rerun](img/rerun.png)
 
-### 0 messagges left
+### 0 messages left
 after rerunning obsessively, it'll eventually get to 0. I recommend you skim through the entire chat to confirm.
 ![0 left](img/0.png)
 
 # untested
 I didn't test all the features so, read up on it in [wiki](https://github.com/bekkibau/deletecord/wiki) and use at your own risk the following features:
-- non-mac m1
 - non-chrome browser
-- deleting messages from a channel
 - NSFW
 - Import
 - after message id
@@ -94,18 +95,21 @@ I didn't test all the features so, read up on it in [wiki](https://github.com/be
 - manually entering the `get` values
 
 # contributing
-I don't plan to maintain this regularly, but I can confirm it works as of this initial upload date. I might have to update it the next time I send a regrettable message to someone (hoping not for a while). If [victornpb/undiscord](https://github.com/victornpb/undiscord) becomes active again, I'll likely cherry-pick commits into this fork to have my own copy. 
+I'll accept easy to review changes (eg. few lines of code & test screenshots) or steps (screenshots) on how to make it work for other browser / OS.
 
-I'll accept easy to review changes (eg. few lines of code & test screenshots) or steps on how to make it work for other browser / OS.
+I don't plan to maintain this regularly, but I can confirm it works as of this initial upload date. I might have to update it the next time I send a lot of regrettable message to someone. If [victornpb/undiscord](https://github.com/victornpb/undiscord) becomes active again, I'll likely cherry-pick commits into this fork to have my own copy. 
 
 # references
 
-this is a modification of [victornpb/undiscord](https://github.com/victornpb/undiscord) which hasn't been updated in over a year, so i forked it to fix small bugs. I've only fixed the bugs that made the script pause or quit prematurely - i didn't add any new features.
+this is an active fork of [victornpb/undiscord](https://github.com/victornpb/undiscord) which hasn't been updated in over a year, so i forked it to fix small bugs. I've only fixed the bugs that made the script pause or quit prematurely - i didn't add any new features.
 
 If this ever breaks, I recommend you first check out: 
 - [victornpb userscript](https://greasyfork.org/en/scripts/406540-undiscord)
 - [victornpb gist](https://gist.github.com/victornpb/135f5b346dea4decfc8f63ad7d9cc182)
 - [victornpb discussions](https://github.com/victornpb/undiscord/discussions)
 
-# Privacy Policy
-Though I am a fork, I adhere to the original creator's [Privacy Policy](https://github.com/bekkibau/deletecord/wiki/Security-Policy)
+# privacy Policy
+i adhere to the original creator's [Privacy Policy](https://github.com/bekkibau/deletecord/wiki/Security-Policy)
+
+> [!WARNING]  
+discord explicity prohibits the use of unauthorized third-party scripts through their [TOS](https://discord.com/terms). so, usage of this script can result in consequences such as account suspension, bans, etc. personally haven't had issues but, please use at your own risk. 
