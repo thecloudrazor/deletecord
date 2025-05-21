@@ -177,11 +177,12 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
         if (messagesToDelete.length > 0) {
 
             if (++iterations < 1) {
-                log.verb(`Waiting for your confirmation...`);
-                if (!await ask(`Do you want to delete ~${total} messages?\nEstimated time: ${etr}\n\n---- Preview ----\n` +
-                    messagesToDelete.map(m => `${m.author.username}#${m.author.discriminator}: ${m.attachments.length ? '[ATTACHMENTS]' : m.content}`).join('\n')))
-                    return end(log.error('Aborted by you!'));
-                log.verb(`OK`);
+                log.info(`Found ${total} messages to delete. Estimated time: ${etr}`);
+                log.info('Preview of messages to be deleted:');
+                messagesToDelete.forEach(m => {
+                    log.info(`${m.author.username}#${m.author.discriminator}: ${m.attachments.length ? '[ATTACHMENTS]' : m.content}`);
+                });
+                log.info('Starting deletion...');
             }
 
             for (let i = 0; i < messagesToDelete.length; i += BATCH_SIZE) {
@@ -496,7 +497,9 @@ function initUI() {
             // If there are multiple search terms, search for each one
             if (searchTerms.length > 0) {
                 for (const term of searchTerms) {
+                    log.info(`Starting search for term: "${term}"`);
                     await deleteMessages(authToken, authorId, guildId, channelIds[i], minId || minDate, maxId || maxDate, term, hasLink, hasFile, includeNsfw, includePinned, searchDelay, deleteDelay, delayIncrement, delayDecrement, delayDecrementPerMsgs, retryAfterMultiplier, logger, stopHndl, onProg);
+                    log.info(`Finished search for term: "${term}"`);
                 }
             } else {
                 // If no search terms, just delete all messages
