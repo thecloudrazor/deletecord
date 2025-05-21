@@ -373,12 +373,12 @@ function initUI() {
                 <span>Search Delay <a
                 href="https://github.com/bekkibau/deletecord/wiki/delay" title="Help"
                 target="_blank">?</a><br>
-                    <input id="searchDelay" type="number" value="1500" step="100"><br>
+                    <input id="searchDelay" type="number" value="5000" step="100"><br>
                 </span>
                 <span>Delete Delay <a
                 href="https://github.com/bekkibau/deletecord/wiki/delay" title="Help"
                 target="_blank">?</a><br>
-                    <input id="deleteDelay" type="number" value="1400" step="100">
+                    <input id="deleteDelay" type="number" value="1200" step="100">
                 </span>
             </div>
             <hr>
