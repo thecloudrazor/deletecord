@@ -460,6 +460,9 @@ function initUI() {
         const progress2 = btn.querySelector('progress');
         const percent = $('.percent');
 
+        // Split content by comma and trim each term
+        const searchTerms = content.split(',').map(term => term.trim()).filter(term => term.length > 0);
+
         const fileSelection = $("input#file");
         fileSelection.addEventListener("change", () => {
             const files = fileSelection.files;
@@ -490,7 +493,15 @@ function initUI() {
 
         stop = stopBtn.disabled = !(startBtn.disabled = true);
         for (let i = 0; i < channelIds.length; i++) {
-            await deleteMessages(authToken, authorId, guildId, channelIds[i], minId || minDate, maxId || maxDate, content, hasLink, hasFile, includeNsfw, includePinned, searchDelay, deleteDelay, delayIncrement, delayDecrement, delayDecrementPerMsgs,retryAfterMultiplier, logger, stopHndl, onProg);
+            // If there are multiple search terms, search for each one
+            if (searchTerms.length > 0) {
+                for (const term of searchTerms) {
+                    await deleteMessages(authToken, authorId, guildId, channelIds[i], minId || minDate, maxId || maxDate, term, hasLink, hasFile, includeNsfw, includePinned, searchDelay, deleteDelay, delayIncrement, delayDecrement, delayDecrementPerMsgs, retryAfterMultiplier, logger, stopHndl, onProg);
+                }
+            } else {
+                // If no search terms, just delete all messages
+                await deleteMessages(authToken, authorId, guildId, channelIds[i], minId || minDate, maxId || maxDate, content, hasLink, hasFile, includeNsfw, includePinned, searchDelay, deleteDelay, delayIncrement, delayDecrement, delayDecrementPerMsgs, retryAfterMultiplier, logger, stopHndl, onProg);
+            }
             stop = stopBtn.disabled = !(startBtn.disabled = false);
         }
     };
