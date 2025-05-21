@@ -27,12 +27,12 @@
  * @param {boolean} hasLink Filter messages that contains link
  * @param {boolean} hasFile Filter messages that contains file
  * @param {boolean} includeNsfw Search in NSFW channels
- * @param {function(string, Array)} extLogger Function for logging
+ * @param {function(string, Array)} _extLogger Function for logging
  * @param {function} stopHndl stopHndl used for stopping
  * @author bekkibau <https://www.github.com/bekkibau>
  * @see https://github.com/bekkibau/deletecord
  */
-async function deleteMessages(authToken, authorId, guildId, channelId, minId, maxId, content, hasLink, hasFile, includeNsfw, includePinned, searchDelay, deleteDelay, delayIncrement, delayDecrement, delayDecrementPerMsgs, retryAfterMultiplier, extLogger, stopHndl, onProgress) {
+async function deleteMessages(authToken, authorId, guildId, channelId, minId, maxId, content, hasLink, hasFile, includeNsfw, includePinned, searchDelay, deleteDelay, delayIncrement, delayDecrement, delayDecrementPerMsgs, retryAfterMultiplier, _extLogger, stopHndl, onProgress) {
     const start = new Date();
     let delCount = 0;
     let failCount = 0;
@@ -105,7 +105,7 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
         let resp;
         try {
             const s = Date.now();
-            resp = await fetch(API_SEARCH_URL + 'search?' + queryString([
+            resp = await fetch(`${API_SEARCH_URL  }search?${  queryString([
                 ['author_id', authorId || undefined],
                 ['channel_id', (guildId !== '@me' ? channelId : undefined) || undefined],
                 ['min_id', minId ? toSnowflake(minId) : undefined],
@@ -117,7 +117,7 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
                 ['has', hasFile ? 'file' : undefined],
                 ['content', content || undefined],
                 ['include_nsfw', includeNsfw ? true : undefined],
-            ]), { headers });
+            ])}`, { headers });
             lastPing = (Date.now() - s);
             avgPing = avgPing > 0 ? (avgPing * 0.9) + (lastPing * 0.1) : lastPing;
         } catch (err) {
@@ -131,7 +131,7 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
             throttledTotalTime += w;
             log.warn(`This channel wasn't indexed, waiting ${w}ms for discord to index it...`);
             await wait(w);
-            return await recurse();
+            return recurse();
         }
 
         if (!resp.ok) {
@@ -146,7 +146,7 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
                 log.verb(`Cooling down for ${w * retryAfterMultiplier}ms before retrying...`);
 
                 await wait(w * retryAfterMultiplier);
-                return await recurse();
+                return recurse();
             } else {
                 return log.error(`Error searching messages, API responded with status ${resp.status}!\n`, await resp.json());
             }
@@ -436,7 +436,7 @@ function initUI() {
     const stopBtn = $('button#stop');
     const autoScroll = $('#autoScroll');
 
-    startBtn.onclick = async e => {
+    startBtn.onclick = async _e => {
         const authToken = $('input#authToken').value.trim();
         const authorId = $('input#authorId').value.trim();
         const guildId = $('input#guildId').value.trim();
@@ -494,22 +494,22 @@ function initUI() {
             stop = stopBtn.disabled = !(startBtn.disabled = false);
         }
     };
-    stopBtn.onclick = e => stop = stopBtn.disabled = !(startBtn.disabled = false);
-    $('button#clear').onclick = e => { logArea.innerHTML = ''; };
-    $('button#getToken').onclick = e => {
+    stopBtn.onclick = _e => stop = stopBtn.disabled = !(startBtn.disabled = false);
+    $('button#clear').onclick = _e => { logArea.innerHTML = ''; };
+    $('button#getToken').onclick = _e => {
         window.dispatchEvent(new Event('beforeunload'));
         const ls = document.body.appendChild(document.createElement('iframe')).contentWindow.localStorage;
         $('input#authToken').value = JSON.parse(localStorage.token);
     };
-    $('button#getAuthor').onclick = e => {
+    $('button#getAuthor').onclick = _e => {
         $('input#authorId').value = JSON.parse(localStorage.user_id_cache);
     };
-    $('button#getGuildAndChannel').onclick = e => {
+    $('button#getGuildAndChannel').onclick = _e => {
         const m = location.href.match(/channels\/([\w@]+)\/(\d+)/);
         $('input#guildId').value = m[1];
         $('input#channelId').value = m[2];
     };
-    $('#redact').onchange = e => {
+    $('#redact').onchange = _e => {
         popover.classList.toggle('redact') &&
             window.alert('This will attempt to hide personal information, but make sure to double check before sharing screenshots.');
     };
