@@ -497,9 +497,7 @@ function initUI() {
             // If there are multiple search terms, search for each one
             if (searchTerms.length > 0) {
                 for (const term of searchTerms) {
-                    log.info(`Starting search for term: "${term}"`);
                     await deleteMessages(authToken, authorId, guildId, channelIds[i], minId || minDate, maxId || maxDate, term, hasLink, hasFile, includeNsfw, includePinned, searchDelay, deleteDelay, delayIncrement, delayDecrement, delayDecrementPerMsgs, retryAfterMultiplier, logger, stopHndl, onProg);
-                    log.info(`Finished search for term: "${term}"`);
                 }
             } else {
                 // If no search terms, just delete all messages
